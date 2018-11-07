@@ -59,9 +59,7 @@ public class ConsumeDAO extends baseDAO {
 		}
 	}
 
-	public boolean purchaseByMember(String title, String screening, Integer seat, String memberId, Double discount) {
-		if(discount == null || discount < 0) discount = 0.0;
-		if(discount > 1) discount = 1.0;
+	public boolean purchaseByMember(String title, String screening, Integer seat, String memberId) {
 		SearchShowDAO searchShowDao = new SearchShowDAO();
 		Show show = searchShowDao.getShow(title, screening);
 		if(show == null) {//check show exist
@@ -74,7 +72,7 @@ public class ConsumeDAO extends baseDAO {
 		if(seat < 1 || seat > show.getSeatNum().intValue()) {//check seat in [1,2,3,...,seat_num]
 			return false;
 		}
-		BigDecimal price = show.getPrice().multiply(BigDecimal.valueOf(1.0 - discount));
+		BigDecimal price = show.getPrice();
 		String sqlInsertTicket = "insert into theatre_ticket.ticket(title,screening,seat,price,member_id,state) values(?,?,?,?,?,1) ";
 		String sqlQueryTicket = "select count(1) from theatre_ticket.ticket where title = ? and screening = ? and seat = ? and (state = 1 or state = 0) ";
 		String sqlUpdateMember = "update theatre_ticket.member set account = account - ?, consumption = consumption + ? where member_id = ? ";
