@@ -54,7 +54,7 @@ public class ConsumeDAO extends baseDAO {
 			pstmt.setBigDecimal(1, amount);
 			pstmt.setString(2, memberId);
 			int rows_count = pstmt.executeUpdate();
-			if(rows_count > 0) {
+			if(rows_count > 0) { /*FAULT## FAILURE INDUCING CODE */
 				return true;
 			} else {
 				return false;
@@ -75,7 +75,7 @@ public class ConsumeDAO extends baseDAO {
 		if(member == null) {//check member exist
 			return false;
 		}
-		if(seat < 1 || seat > show.getSeatNum().intValue()) {//check seat in [1,2,3,...,seat_num]
+		if(seat < 1 || seat > show.getSeatNum().intValue()) { /*FAULT## FAILURE INDUCING CODE */ //check seat in [1,2,3,...,seat_num] 
 			return false;
 		}
 		BigDecimal price = show.getPrice();

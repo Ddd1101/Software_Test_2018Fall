@@ -80,7 +80,7 @@ public class ConsumeDAOTest extends TestCase {
 		assertFalse(consumeDAO.purchaseByMember(null, "A0001", 201, "A0001"));
 		assertFalse(consumeDAO.purchaseByMember(null, "A0001", 7, null));
 		assertFalse(consumeDAO.purchaseByMember("念念手记", null, -1, "A0001"));
-		assertFalse(consumeDAO.purchaseByMember("念念手记", "A0001", 201, "A0001"));
+		assertFalse(consumeDAO.purchaseByMember("念念手记", null, 201, "A0001"));//
 		assertFalse(consumeDAO.purchaseByMember("念念手记", "A0001", 8, null));
 		assertFalse(consumeDAO.purchaseByMember("念念手记", "A0001", -1, null));
 		assertFalse(consumeDAO.purchaseByMember("念念手记", null, 201, null));
