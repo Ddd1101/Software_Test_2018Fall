@@ -32,6 +32,12 @@ public class ConsumeDAO extends baseDAO {
 	}
 	
 	public boolean recharge(String memberId, BigDecimal amount) {
+		if(memberId == null) {
+			return false;
+		}
+		if(amount == null) {
+			return false;
+		}
 		if(amount.compareTo(BigDecimal.valueOf(0)) < 1) {
 			return false;
 		}

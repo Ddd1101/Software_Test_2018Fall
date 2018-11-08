@@ -56,15 +56,15 @@ public class ConsumeDAOTest extends TestCase {
 
 	@Test
 	public void testRecharge() {
-		assertTrue(consumeDAO.recharge("A0001", BigDecimal.valueOf(2000000,2)));
+		assertTrue(consumeDAO.recharge("A0001", BigDecimal.valueOf(600000,2)));
 		assertFalse(consumeDAO.recharge("A0001", null));
 		assertFalse(consumeDAO.recharge("A0001", BigDecimal.valueOf(-200000,2)));
 		assertFalse(consumeDAO.recharge("A0002", BigDecimal.valueOf(400000,2)));
 		assertFalse(consumeDAO.recharge("A0002",null));
-		assertFalse(consumeDAO.recharge("A0002",BigDecimal.valueOf(-10000.2)));
+		assertFalse(consumeDAO.recharge("A0002",BigDecimal.valueOf(-10000,2)));
 		assertFalse(consumeDAO.recharge(null,BigDecimal.valueOf(20000,2)));
 		assertFalse(consumeDAO.recharge(null,null));
-		assertFalse(consumeDAO.recharge(null,BigDecimal.valueOf(-10000.2)));	
+		assertFalse(consumeDAO.recharge(null,BigDecimal.valueOf(-10000,2)));	
 	}
 
 	@Test
