@@ -28,19 +28,20 @@ public class SearchShowDAOTest extends TestCase {
 	@Test
 	public void testSearchTitlesByDayTimestamp() {
 		ArrayList<String> titles_expect = new ArrayList<String>();
- 
+		ArrayList<String> titles_expect0 = new ArrayList<String>();
+		
 		titles_expect.add("上海交大迎新晚会");
 		
 //		测试searchTitlesByDay函数
 		assertTrue(dao.searchTitlesByDay(Timestamp.valueOf("2018-10-10 18:00:00")));
-		assertFalse(dao.searchTitlesByDay("2018-10-10 18:00:00"));
+		assertEquals(titles_expect0, dao.searchTitlesByDay(null));
+
+//		错误的Timestamp类型赋值，不再作为无效等价类
+//		assertFalse(dao.searchTitlesByDay("2018-10-10 18:00:00"));
 //		assertNull(dao.searchTitlesByDay(Timestamp.valueOf("10-10-2018 00:00:00")));
 //		assertNull(dao.searchTitlesByDay(Timestamp.valueOf("2018-10-10")));	}
 	}
-	private void assertFalse(ArrayList<String> searchTitlesByDay) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	private void assertTrue(ArrayList<String> searchTitlesByDay) {
 		// TODO Auto-generated method stub
 		
@@ -66,29 +67,30 @@ public class SearchShowDAOTest extends TestCase {
 		System.out.println(show.getState());
 		
 		assertEquals(titles_expect1, dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("2018-10-10 18:00:00"), 1));
-//		assertNull(dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("2018-10-10 18:00:00"), 5));
-//		assertNull(dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("2018-10-10 18:00:00"), null));
-//		assertNull(dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("10-10-2018 18:00:00"), 1));
-//		assertNull(dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("10-10-2018 18:00:00"), 5));
-//		assertNull(dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("10-10-2018 18:00:00"), 1));
-//		assertNull(dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("2018-10-10"), 1));
-//		assertNull(dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("2018-10-10"), 5));
-//		assertNull(dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("2018-10-10"), null));
+		assertEquals(titles_expect2, dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("2018-10-10 18:00:00"), 5));
+		assertEquals(titles_expect1, dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("2018-10-10 18:00:00"), null));
 		assertEquals(titles_expect2, dao.SearchShows("上海交大迎新晚会", null, 0));
 		assertEquals(titles_expect2, dao.SearchShows("上海交大迎新晚会", null, 5));
 		assertEquals(titles_expect1, dao.SearchShows("上海交大迎新晚会", null, null));
 		assertEquals(titles_expect2, dao.SearchShows(null, Timestamp.valueOf("2018-10-10 18:00:00"), 1));
 		assertEquals(titles_expect2, dao.SearchShows(null, Timestamp.valueOf("2018-10-10 18:00:00"), 5));
 		assertEquals(titles_expect2, dao.SearchShows(null, Timestamp.valueOf("2018-10-10 18:00:00"), null));
+		assertEquals(titles_expect2, dao.SearchShows(null, null, 1));
+		assertEquals(titles_expect2, dao.SearchShows(null, null, 5));
+		assertEquals(titles_expect2, dao.SearchShows(null, null, null));
+		
+//		assertNull(dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("10-10-2018 18:00:00"), 1));
+//		assertNull(dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("10-10-2018 18:00:00"), 5));
+//		assertNull(dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("10-10-2018 18:00:00"), 1));
+//		assertNull(dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("2018-10-10"), 1));
+//		assertNull(dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("2018-10-10"), 5));
+//		assertNull(dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("2018-10-10"), null));
 //		assertNull(dao.SearchShows(null, Timestamp.valueOf("10-10-2018 18:00:00"), 1));
 //		assertNull(dao.SearchShows(null, Timestamp.valueOf("10-10-2018 18:00:00"), 5));
 //		assertNull(dao.SearchShows(null, Timestamp.valueOf("10-10-2018 18:00:00"), null));
 //		assertNull(dao.SearchShows(null, Timestamp.valueOf("2018-10-10"), 1));
 //		assertNull(dao.SearchShows(null, Timestamp.valueOf("2018-10-10"), 5));
 //		assertNull(dao.SearchShows(null, Timestamp.valueOf("2018-10-10"), null));
-		assertEquals(titles_expect2, dao.SearchShows(null, null, 1));
-		assertEquals(titles_expect2, dao.SearchShows(null, null, 5));
-		assertEquals(titles_expect2, dao.SearchShows(null, null, null));	
 	}
 
 	@Test

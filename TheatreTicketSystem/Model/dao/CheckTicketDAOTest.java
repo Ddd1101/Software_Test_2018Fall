@@ -1,11 +1,6 @@
 package dao;
 
-import static org.junit.Assert.*;
-
-import java.sql.PreparedStatement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.sql.Connection;
 
 import java.math.BigDecimal;
 
@@ -28,7 +23,6 @@ public class CheckTicketDAOTest extends TestCase{
 	public void setUp() throws Exception {
 		dbc = new DatabaseConnection();
 		dao = new CheckTicketDAO();
-		Connection conn = dbc.getConnection();
 		
 		title_expect1 = new Ticket();
 		title_expect2 = new ArrayList<Ticket>();
@@ -50,20 +44,20 @@ public class CheckTicketDAOTest extends TestCase{
 	
 	@Test
 	public void testGetTicket() {
-		Ticket title_expect3 = new Ticket();
 		assertEquals(title_expect1, dao.getTicket(2L)); 
 		assertNull(dao.getTicket(11L));
 		assertNull(dao.getTicket(-1L));
 		assertNull(dao.getTicket(0L));
+		assertNull(dao.getTicket(null));
 	}
 
 	@Test
 	public void testSearchTicketsByMemberId() {
-		ArrayList<Ticket> title_expect4 = new ArrayList<Ticket>();
+		ArrayList<Ticket> title_expect3 = new ArrayList<Ticket>();
 		assertEquals(title_expect2, dao.searchTicketsByMemberId("A0002"));
-		assertEquals(title_expect4, dao.searchTicketsByMemberId("B0001"));
-		assertEquals(title_expect4, dao.searchTicketsByMemberId("A001"));
-		assertEquals(title_expect4, dao.searchTicketsByMemberId(null));
+		assertEquals(title_expect3, dao.searchTicketsByMemberId("B0001"));
+		assertEquals(title_expect3, dao.searchTicketsByMemberId("A001"));
+		assertEquals(title_expect3, dao.searchTicketsByMemberId(null));
 	}
 
 	@Test

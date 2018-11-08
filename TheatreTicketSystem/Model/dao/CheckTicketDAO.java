@@ -15,6 +15,9 @@ public class CheckTicketDAO extends baseDAO {
 				+ "where ticket_id = ? ";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
+			if(ticketId == null) {
+				return null;
+			}
 			pstmt.setLong(1, ticketId);
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -28,7 +31,7 @@ public class CheckTicketDAO extends baseDAO {
 			e.printStackTrace();
 			return null;
 		}
-	}
+	} 
 	
 	public ArrayList<Ticket> searchTicketsByMemberId(String memberId) {
 		String sql = "select * "
