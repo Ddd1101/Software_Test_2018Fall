@@ -1,2 +1,4 @@
 .DS_Store
 Model/dbc/DatabaseConnection.java
+build/classes/*
+build/classes/dao/SearchShowDAOTest.class
