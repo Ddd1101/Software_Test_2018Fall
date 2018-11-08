@@ -49,7 +49,7 @@ public class baseDAO {
 			while((sql = reader.readLine()) != null) {
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				int rows_count = pstmt.executeUpdate();
-//				System.out.println(rows_count + ":\t" + sql);
+				System.out.println(rows_count + ":\t" + sql);
 			}
 			reader.close();
 		} catch(Exception e) {

@@ -8,7 +8,7 @@ public class DatabaseConnection {
 	private static final String DBDRIVER = "com.mysql.cj.jdbc.Driver";
 	private static final String DBURL = "jdbc:mysql://localhost:3306?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai";
 	private static final String DBuser = "theatre_admin";
-	private static final String DBPASSWORD = "1234";
+	private static final String DBPASSWORD = "";
 	private Connection conn = null;
 	
 	public DatabaseConnection() throws Exception {
