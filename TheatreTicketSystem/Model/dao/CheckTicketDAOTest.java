@@ -13,7 +13,7 @@ import vo.Ticket;
 import dbc.DatabaseConnection;
 import junit.framework.TestCase;
 
-public class CheckTicketDAOTest extends TestCase{
+public class CheckTicketDAOTest extends TestCase {
 	private DatabaseConnection dbc;
 	private CheckTicketDAO dao;
 	private ArrayList<Ticket> title_expect2;
@@ -23,7 +23,8 @@ public class CheckTicketDAOTest extends TestCase{
 	public void setUp() throws Exception {
 		dbc = new DatabaseConnection();
 		dao = new CheckTicketDAO();
-		
+		dao.runSQL("Z:\\Software_Test_2018Fall\\TheatreTicketSystem\\resources\\sample.sql");
+
 		title_expect1 = new Ticket();
 		title_expect2 = new ArrayList<Ticket>();
 		title_expect1.setScreening("A0001");
@@ -32,7 +33,7 @@ public class CheckTicketDAOTest extends TestCase{
 		title_expect1.setSeat(2);
 		title_expect1.setState(1);
 		title_expect1.setTitle("上海交大迎新晚会");
-		title_expect1.setPrice(BigDecimal.valueOf(10000,2));
+		title_expect1.setPrice(BigDecimal.valueOf(10000, 2));
 		title_expect2.add(title_expect1);
 	}
 
@@ -41,10 +42,10 @@ public class CheckTicketDAOTest extends TestCase{
 		dbc.close();
 		System.out.println("checkticket conn release");
 	}
-	
+
 	@Test
 	public void testGetTicket() {
-		assertEquals(title_expect1, dao.getTicket(2L)); 
+		assertEquals(title_expect1, dao.getTicket(2L));
 		assertNull(dao.getTicket(11L));
 		assertNull(dao.getTicket(-1L));
 		assertNull(dao.getTicket(0L));
@@ -66,7 +67,7 @@ public class CheckTicketDAOTest extends TestCase{
 		assertFalse(dao.checkTicket(11L));
 		assertFalse(dao.checkTicket(-1L));
 		assertFalse(dao.checkTicket(0L));
-		assertNull(dao.checkTicket(null));
+		assertFalse(dao.checkTicket(null));
 	}
-	
+
 }

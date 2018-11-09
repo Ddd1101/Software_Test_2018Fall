@@ -29,10 +29,10 @@ public class SearchShowDAO extends baseDAO {
 		}
 	}
 	
-	public ArrayList<String> searchTitlesByDay(String startTimeStr) {
-		Timestamp startTime = Timestamp.valueOf(startTimeStr);
-		return searchTitlesByDay(startTime);
-	}
+//	public ArrayList<String> searchTitlesByDay(String startTimeStr) {
+//		Timestamp startTime = Timestamp.valueOf(startTimeStr);
+//		return searchTitlesByDay(startTime);
+//	}
 	
 	public ArrayList<Show> SearchShows(String title, Timestamp startTime, Integer state) {
 		String sql = "select * from theatre_ticket.show "

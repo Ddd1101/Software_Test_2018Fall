@@ -55,7 +55,14 @@ public class CheckTicketDAO extends baseDAO {
 	}
 	
 	public boolean checkTicket(Long ticketId) {
+		if(ticketId == null) {
+			return false;
+		}
 		Ticket ticket = getTicket(ticketId);
+		if(ticket == null) {
+			return false;
+		}
+		
 		if(ticket.getState() != 1) {
 			return false;
 		}

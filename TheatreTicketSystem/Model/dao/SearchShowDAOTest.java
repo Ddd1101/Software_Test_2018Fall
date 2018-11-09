@@ -37,7 +37,6 @@ public class SearchShowDAOTest extends TestCase {
 		assertEquals(titles_expect0, dao.searchTitlesByDay(null));
 
 //		错误的Timestamp类型赋值，不再作为无效等价类
-//		assertFalse(dao.searchTitlesByDay("2018-10-10 18:00:00"));
 //		assertNull(dao.searchTitlesByDay(Timestamp.valueOf("10-10-2018 00:00:00")));
 //		assertNull(dao.searchTitlesByDay(Timestamp.valueOf("2018-10-10")));	}
 	}
