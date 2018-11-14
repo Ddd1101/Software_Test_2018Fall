@@ -1,10 +1,12 @@
-package  test;
+package dao.res;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import dao.SearchShowDAO;
+import dao.res.CheckTicketDAO;
+import dao.res.SearchShowDAO;
+import dbc.DatabaseConnection;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,11 +17,14 @@ import vo.Show;
 public class SearchShowDAOTest extends TestCase {
 
 	private SearchShowDAO dao;
-	
+	private DatabaseConnection dbc;
+
 	@Before
 	public void setUp() throws Exception {
+		dbc = new DatabaseConnection();
+		//dao.runSQL("Z:\\Software_Test_2018Fall\\TheatreTicketSystem\\resources\\sample.sql");
+		dbc.runSQL("/Users/ddd/Documents/SJTU_Courses/SoftwareTest/Software_Test_2018Fall/TheatreTicketSystem/resources/sample.sql");
 		dao = new SearchShowDAO();
-
 	}
 	@After
 	public void tearDown() throws Exception {
@@ -31,7 +36,7 @@ public class SearchShowDAOTest extends TestCase {
 		ArrayList<String> titles_expect = new ArrayList<String>();
 		ArrayList<String> titles_expect0 = new ArrayList<String>();
 		
-		titles_expect.add("?????????????");
+		titles_expect.add("上海交通迎新晚会");
 		
 //		????searchTitlesByDay????
 		assertTrue(dao.searchTitlesByDay(Timestamp.valueOf("2018-10-10 18:00:00")));
@@ -55,7 +60,7 @@ public class SearchShowDAOTest extends TestCase {
 		show.setScreening("A0001");
 		show.setSeatNum(BigDecimal.valueOf(10000,0));
 		show.setState(1);
-		show.setTitle("?????????????");
+		show.setTitle("上海交大迎新晚会");
 		show.setStartTime(Timestamp.valueOf("2018-10-10 18:00:00"));
 		titles_expect1.add(show);
 		
@@ -66,12 +71,12 @@ public class SearchShowDAOTest extends TestCase {
 		System.out.println(show.getStartTime());
 		System.out.println(show.getState());
 		
-		assertEquals(titles_expect1, dao.SearchShows("?????????????", Timestamp.valueOf("2018-10-10 18:00:00"), 1));
-		assertEquals(titles_expect2, dao.SearchShows("?????????????", Timestamp.valueOf("2018-10-10 18:00:00"), 5));
-		assertEquals(titles_expect1, dao.SearchShows("?????????????", Timestamp.valueOf("2018-10-10 18:00:00"), null));
-		assertEquals(titles_expect2, dao.SearchShows("?????????????", null, 0));
-		assertEquals(titles_expect2, dao.SearchShows("?????????????", null, 5));
-		assertEquals(titles_expect1, dao.SearchShows("?????????????", null, null));
+		assertEquals(titles_expect1, dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("2018-10-10 18:00:00"), 1));
+		assertEquals(titles_expect2, dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("2018-10-10 18:00:00"), 5));
+		assertEquals(titles_expect1, dao.SearchShows("上海交大迎新晚会", Timestamp.valueOf("2018-10-10 18:00:00"), null));
+		assertEquals(titles_expect2, dao.SearchShows("上海交大迎新晚会", null, 0));
+		assertEquals(titles_expect2, dao.SearchShows("上海交大迎新晚会", null, 5));
+		assertEquals(titles_expect1, dao.SearchShows("上海交大迎新晚会", null, null));
 		assertEquals(titles_expect2, dao.SearchShows(null, Timestamp.valueOf("2018-10-10 18:00:00"), 1));
 		assertEquals(titles_expect2, dao.SearchShows(null, Timestamp.valueOf("2018-10-10 18:00:00"), 5));
 		assertEquals(titles_expect2, dao.SearchShows(null, Timestamp.valueOf("2018-10-10 18:00:00"), null));
@@ -100,13 +105,13 @@ public class SearchShowDAOTest extends TestCase {
 		show1.setScreening("A0001");
 		show1.setSeatNum(BigDecimal.valueOf(200,0));
 		show1.setState(1);
-		show1.setTitle("???????");
+		show1.setTitle("念念手记");
 		show1.setStartTime(Timestamp.valueOf("2018-10-10 17:20:00"));
 		
-		assertEquals(show1, dao.getShow("???????", "A0001"));	
-		assertNull(dao.getShow("???????", "B0001"));
-		assertNull(dao.getShow("???????", "A001"));
-		assertNull(dao.getShow("???????", null));
+		assertEquals(show1, dao.getShow("念念手记", "A0001"));
+		assertNull(dao.getShow("念念手记", "B0001"));
+		assertNull(dao.getShow("念念手记", "A001"));
+		assertNull(dao.getShow("念念手记", null));
 		assertNull(dao.getShow(null, "A0001"));
 		assertNull(dao.getShow(null, "B0001"));
 		assertNull(dao.getShow(null, "A001"));
