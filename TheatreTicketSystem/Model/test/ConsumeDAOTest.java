@@ -1,6 +1,7 @@
-package dao;
+package test;
 
 import static org.junit.Assert.*;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.math.BigDecimal;
 
+import dao.ConsumeDAO;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
