@@ -82,6 +82,10 @@ public class CheckTicketDAO extends baseDAO {
 	}
 	
 	public ArrayList<Boolean> checkTicketArray(ArrayList<Long> ticketIdList) {
+		return checkTicketArray(ticketIdList, false);
+	}
+	
+	public ArrayList<Boolean> checkTicketArray(ArrayList<Long> ticketIdList, boolean asEntirety) {
 		ArrayList<Boolean> resultList = new ArrayList<>();
 		ArrayList<Boolean> falseList = new ArrayList<>();
 		for(int i = 0; i < ticketIdList.size(); i++) {
@@ -93,12 +97,17 @@ public class CheckTicketDAO extends baseDAO {
 				boolean result = checkTicket(ticketId);
 				resultList.add(result);
 			}
-			if(resultList.indexOf(false) < 0) {
+			if(asEntirety) {
+				if(resultList.indexOf(false) < 0) {
+					conn.commit();
+					return resultList;
+				} else {
+					conn.rollback();
+					return falseList;
+				}
+			} else {
 				conn.commit();
 				return resultList;
-			} else {
-				conn.rollback();
-				return falseList;
 			}
 		} catch (Exception e) {
 			try {
