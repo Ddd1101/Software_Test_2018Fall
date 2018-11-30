@@ -24,7 +24,7 @@ public class ConsumeDAOTest extends TestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 		dbc = new DatabaseConnection();
-		dbc.runSQL("/Users/ddd/Documents/SJTU_Courses/SoftwareTest/Software_Test_2018Fall/TheatreTicketSystem/resources/sample.sql");
+		dbc.runSQL("./resources/sample.sql");
 		consumeDAO = new ConsumeDAO();
 		//consumeDAO.runSQL("/Users/ddd/Documents/SJTU_Courses/SoftwareTest/Software_Test_2018Fall/TheatreTicketSystem/resources/sample.txt");
 		Connection conn = dbc.getConnection();
@@ -65,30 +65,33 @@ public class ConsumeDAOTest extends TestCase {
 
 	@Test
 	public void testPurchaseByMember() {
-		assertTrue(consumeDAO.purchaseByMember("蹇靛康鎵嬭", "A0001", 3, "A0001"));
+		assertTrue(consumeDAO.purchaseByMember("念念手记", "A0001", 3, "A0001"));
 		assertFalse(consumeDAO.purchaseByMember(null, "A0001", 3, "A0001"));
-		assertFalse(consumeDAO.purchaseByMember("蹇靛康鎵嬭", null, 4, "A0001"));
-		assertFalse(consumeDAO.purchaseByMember("蹇靛康鎵嬭", "A0001", -1, "A0001"));
-		assertFalse(consumeDAO.purchaseByMember("蹇靛康鎵嬭", "A0001", 201, "A0001"));
-		assertFalse(consumeDAO.purchaseByMember("蹇靛康鎵嬭", "A0001", 5, null));
+		assertFalse(consumeDAO.purchaseByMember("念念手记", null, 4, "A0001"));
+		assertFalse(consumeDAO.purchaseByMember("念念手记", "A0001", -1, "A0001"));
+		assertFalse(consumeDAO.purchaseByMember("念念手记", "A0001", 201, "A0001"));
+		assertFalse(consumeDAO.purchaseByMember("念念手记", "A0001", 5, null));
 		assertFalse(consumeDAO.purchaseByMember(null, null, 6, "A0001"));
 		assertFalse(consumeDAO.purchaseByMember(null, "A0001", -1, "A0001"));
 		assertFalse(consumeDAO.purchaseByMember(null, "A0001", 201, "A0001"));
 		assertFalse(consumeDAO.purchaseByMember(null, "A0001", 7, null));
-		assertFalse(consumeDAO.purchaseByMember("蹇靛康鎵嬭", null, -1, "A0001"));
-		assertFalse(consumeDAO.purchaseByMember("蹇靛康鎵嬭", null, 201, "A0001"));//
-		assertFalse(consumeDAO.purchaseByMember("蹇靛康鎵嬭", "A0001", 8, null));
-		assertFalse(consumeDAO.purchaseByMember("蹇靛康鎵嬭", "A0001", -1, null));
-		assertFalse(consumeDAO.purchaseByMember("蹇靛康鎵嬭", null, 201, null));
+		assertFalse(consumeDAO.purchaseByMember("念念手记", null, -1, "A0001"));
+		assertFalse(consumeDAO.purchaseByMember("念念手记", null, 201, "A0001"));//
+		assertFalse(consumeDAO.purchaseByMember("念念手记", "A0001", 8, null));
+		assertFalse(consumeDAO.purchaseByMember("念念手记", "A0001", -1, null));
+		assertFalse(consumeDAO.purchaseByMember("念念手记", null, 201, null));
 		assertFalse(consumeDAO.purchaseByMember(null, null, -1, "A0001"));
 		assertFalse(consumeDAO.purchaseByMember(null, null, 201, "A0001"));
-		assertFalse(consumeDAO.purchaseByMember("蹇靛康鎵嬭", "A0001", -1, null));
-		assertFalse(consumeDAO.purchaseByMember("蹇靛康鎵嬭", "A0001", 201, null));
+		assertFalse(consumeDAO.purchaseByMember("念念手记", "A0001", -1, null));
+		assertFalse(consumeDAO.purchaseByMember("念念手记", "A0001", 201, null));
 		assertFalse(consumeDAO.purchaseByMember(null, "A0001", -1, null));
 		assertFalse(consumeDAO.purchaseByMember(null, "A0001", 201, null));
 		assertFalse(consumeDAO.purchaseByMember(null, null, 9, null));
 		assertFalse(consumeDAO.purchaseByMember(null, null, -1, null));
 		assertFalse(consumeDAO.purchaseByMember(null, null, 201, null));
+		assertFalse(consumeDAO.purchaseByMember("上海交大迎新晚会", "A0001", 1, "A0001")); //new
+		assertFalse(consumeDAO.purchaseByMember("上海交大迎新晚会", "A0001", 3, "A0001")); //new
+		assertTrue(consumeDAO.purchaseByMember("上海交大迎新晚会", "A0001", 4, "A0001")); //new
 	}
 
 }

@@ -23,7 +23,7 @@ public class SearchShowDAOTest extends TestCase {
 	public void setUp() throws Exception {
 		dbc = new DatabaseConnection();
 		//dao.runSQL("Z:\\Software_Test_2018Fall\\TheatreTicketSystem\\resources\\sample.sql");
-		dbc.runSQL("/Users/ddd/Documents/SJTU_Courses/SoftwareTest/Software_Test_2018Fall/TheatreTicketSystem/resources/sample.sql");
+		dbc.runSQL("./resources/sample.sql");
 		dao = new SearchShowDAO();
 	}
 	@After
@@ -36,7 +36,7 @@ public class SearchShowDAOTest extends TestCase {
 		ArrayList<String> titles_expect = new ArrayList<String>();
 		ArrayList<String> titles_expect0 = new ArrayList<String>();
 		
-		titles_expect.add("ä¸Šæµ·äº¤é€šè¿Žæ–°æ™šä¼š");
+		titles_expect.add("ÉÏº£½»´óÓ­ÐÂÍí»á");
 		
 //		????searchTitlesByDay????
 		assertTrue(dao.searchTitlesByDay(Timestamp.valueOf("2018-10-10 18:00:00")));
@@ -60,7 +60,7 @@ public class SearchShowDAOTest extends TestCase {
 		show.setScreening("A0001");
 		show.setSeatNum(BigDecimal.valueOf(10000,0));
 		show.setState(1);
-		show.setTitle("ä¸Šæµ·äº¤å¤§è¿Žæ–°æ™šä¼š");
+		show.setTitle("ÉÏº£½»´óÓ­ÐÂÍí»á");
 		show.setStartTime(Timestamp.valueOf("2018-10-10 18:00:00"));
 		titles_expect1.add(show);
 		
@@ -71,12 +71,12 @@ public class SearchShowDAOTest extends TestCase {
 		System.out.println(show.getStartTime());
 		System.out.println(show.getState());
 		
-		assertEquals(titles_expect1, dao.SearchShows("ä¸Šæµ·äº¤å¤§è¿Žæ–°æ™šä¼š", Timestamp.valueOf("2018-10-10 18:00:00"), 1));
-		assertEquals(titles_expect2, dao.SearchShows("ä¸Šæµ·äº¤å¤§è¿Žæ–°æ™šä¼š", Timestamp.valueOf("2018-10-10 18:00:00"), 5));
-		assertEquals(titles_expect1, dao.SearchShows("ä¸Šæµ·äº¤å¤§è¿Žæ–°æ™šä¼š", Timestamp.valueOf("2018-10-10 18:00:00"), null));
-		assertEquals(titles_expect2, dao.SearchShows("ä¸Šæµ·äº¤å¤§è¿Žæ–°æ™šä¼š", null, 0));
-		assertEquals(titles_expect2, dao.SearchShows("ä¸Šæµ·äº¤å¤§è¿Žæ–°æ™šä¼š", null, 5));
-		assertEquals(titles_expect1, dao.SearchShows("ä¸Šæµ·äº¤å¤§è¿Žæ–°æ™šä¼š", null, null));
+		assertEquals(titles_expect1, dao.SearchShows("ÉÏº£½»´óÓ­ÐÂÍí»á", Timestamp.valueOf("2018-10-10 18:00:00"), 1));
+		assertEquals(titles_expect2, dao.SearchShows("ÉÏº£½»´óÓ­ÐÂÍí»á", Timestamp.valueOf("2018-10-10 18:00:00"), 5));
+		assertEquals(titles_expect1, dao.SearchShows("ÉÏº£½»´óÓ­ÐÂÍí»á", Timestamp.valueOf("2018-10-10 18:00:00"), null));
+		assertEquals(titles_expect2, dao.SearchShows("ÉÏº£½»´óÓ­ÐÂÍí»á", null, 0));
+		assertEquals(titles_expect2, dao.SearchShows("ÉÏº£½»´óÓ­ÐÂÍí»á", null, 5));
+		assertEquals(titles_expect1, dao.SearchShows("ÉÏº£½»´óÓ­ÐÂÍí»á", null, null));
 		assertEquals(titles_expect2, dao.SearchShows(null, Timestamp.valueOf("2018-10-10 18:00:00"), 1));
 		assertEquals(titles_expect2, dao.SearchShows(null, Timestamp.valueOf("2018-10-10 18:00:00"), 5));
 		assertEquals(titles_expect2, dao.SearchShows(null, Timestamp.valueOf("2018-10-10 18:00:00"), null));
@@ -105,13 +105,13 @@ public class SearchShowDAOTest extends TestCase {
 		show1.setScreening("A0001");
 		show1.setSeatNum(BigDecimal.valueOf(200,0));
 		show1.setState(1);
-		show1.setTitle("å¿µå¿µæ‰‹è®°");
+		show1.setTitle("ÄîÄîÊÖ¼Ç");
 		show1.setStartTime(Timestamp.valueOf("2018-10-10 17:20:00"));
 		
-		assertEquals(show1, dao.getShow("å¿µå¿µæ‰‹è®°", "A0001"));
-		assertNull(dao.getShow("å¿µå¿µæ‰‹è®°", "B0001"));
-		assertNull(dao.getShow("å¿µå¿µæ‰‹è®°", "A001"));
-		assertNull(dao.getShow("å¿µå¿µæ‰‹è®°", null));
+		assertEquals(show1, dao.getShow("ÄîÄîÊÖ¼Ç", "A0001"));
+		assertNull(dao.getShow("ÄîÄîÊÖ¼Ç", "B0001"));
+		assertNull(dao.getShow("ÄîÄîÊÖ¼Ç", "A001"));
+		assertNull(dao.getShow("ÄîÄîÊÖ¼Ç", null));
 		assertNull(dao.getShow(null, "A0001"));
 		assertNull(dao.getShow(null, "B0001"));
 		assertNull(dao.getShow(null, "A001"));
