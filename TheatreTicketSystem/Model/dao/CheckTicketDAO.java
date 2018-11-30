@@ -86,6 +86,9 @@ public class CheckTicketDAO extends baseDAO {
 	}
 	
 	public ArrayList<Boolean> checkTicketArray(ArrayList<Long> ticketIdList, boolean asEntirety) {
+		if(ticketIdList == null) {
+			return null;
+		}
 		ArrayList<Boolean> resultList = new ArrayList<>();
 		ArrayList<Boolean> falseList = new ArrayList<>();
 		for(int i = 0; i < ticketIdList.size(); i++) {
