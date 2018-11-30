@@ -58,21 +58,26 @@ public class CheckTicketDAO extends baseDAO {
 		if(ticketId == null) {
 			return false;
 		}
-		String sql = "update theatre_ticket.ticket "
-				+ "set state = 0 "
-				+ "where ticket_id = ? and state = 1";
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setLong(1, ticketId);
-			int rows_count = pstmt.executeUpdate();
-			if(rows_count > 0) {
-				return true;
-			} else {
+		Ticket ticket = getTicket(ticketId);
+		if(ticket == null || ticket.getState() != 1) {
+			return false;
+		} else {
+			try {
+				String sql = "update theatre_ticket.ticket "
+						+ "set state = 0 "
+						+ "where ticket_id = ? ";
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				pstmt.setLong(1, ticketId);
+				int rows_count = pstmt.executeUpdate();
+				if(rows_count > 0) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 				return false;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
 		}
 	}
 	
