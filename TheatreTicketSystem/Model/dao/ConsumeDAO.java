@@ -79,7 +79,7 @@ public class ConsumeDAO extends baseDAO {
 			return false;
 		}
 		BigDecimal price = show.getPrice();
-		String sqlQueryTicket = "select * from theatre_ticket.ticket where title = ? and screening = ? and seat = ?";
+		String sqlQueryTicket = "select * from theatre_ticket.ticket where title = ? and screening = ? and seat = ? and (state = 0 or state = 1)";
 		String sqlInsertTicket = "insert into theatre_ticket.ticket(title,screening,seat,price,member_id,state) values(?,?,?,?,?,1) ";
 		String sqlUpdateMember = "update theatre_ticket.member set account = account - ?, consumption = consumption + ? where member_id = ? ";
 		String sqlQueryMember = "select * from theatre_ticket.member where member_id = ? ";
