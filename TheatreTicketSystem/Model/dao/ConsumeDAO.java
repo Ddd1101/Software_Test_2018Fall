@@ -79,46 +79,43 @@ public class ConsumeDAO extends baseDAO {
 			return false;
 		}
 		BigDecimal price = show.getPrice();
+		String sqlQueryTicket = "select * from theatre_ticket.ticket where title = ? and screening = ? and seat = ?";
 		String sqlInsertTicket = "insert into theatre_ticket.ticket(title,screening,seat,price,member_id,state) values(?,?,?,?,?,1) ";
-		String sqlQueryTicket = "select count(1) from theatre_ticket.ticket where title = ? and screening = ? and seat = ? and (state = 1 or state = 0) ";
 		String sqlUpdateMember = "update theatre_ticket.member set account = account - ?, consumption = consumption + ? where member_id = ? ";
 		String sqlQueryMember = "select * from theatre_ticket.member where member_id = ? ";
 		boolean isSuccess = false;
 		try {
 			conn.setAutoCommit(false);
 
+			PreparedStatement pstmtQueryTicket = conn.prepareStatement(sqlQueryTicket);
+			pstmtQueryTicket.setString(1, title);
+			pstmtQueryTicket.setString(2, screening);
+			pstmtQueryTicket.setInt(3, seat);
 			PreparedStatement pstmtInsertTicket = conn.prepareStatement(sqlInsertTicket);
 			pstmtInsertTicket.setString(1, title);
 			pstmtInsertTicket.setString(2, screening);
 			pstmtInsertTicket.setInt(3, seat);
 			pstmtInsertTicket.setBigDecimal(4, price);
 			pstmtInsertTicket.setString(5, memberId);
-			PreparedStatement pstmtQueryTicket = conn.prepareStatement(sqlQueryTicket);
-			pstmtQueryTicket.setString(1, title);
-			pstmtQueryTicket.setString(2, screening);
-			pstmtQueryTicket.setInt(3, seat);
 			PreparedStatement pstmtUpdateMember = conn.prepareStatement(sqlUpdateMember);
 			pstmtUpdateMember.setBigDecimal(1, price);
 			pstmtUpdateMember.setBigDecimal(2, price);
 			pstmtUpdateMember.setString(3, memberId);
 			PreparedStatement pstmtQueryMember = conn.prepareStatement(sqlQueryMember);
 			pstmtQueryMember.setString(1, memberId);
-
-			//pstmtInsertTicket
-			int countInsertTicket = pstmtInsertTicket.executeUpdate();
-			if(countInsertTicket == 1) {
+			
+			//pstmtQueryTicket
+			ResultSet rsQueryTicket = pstmtQueryTicket.executeQuery();
+			if(!rsQueryTicket.next()) {
 				isSuccess = true;
 			}
 			
-			//pstmtQueryTicket
+			//pstmtInsertTicket
 			if(isSuccess) {
 				isSuccess = false;
-				ResultSet rsQueryTicket = pstmtQueryTicket.executeQuery();
-				if(rsQueryTicket.next()) {
-					int resultQueryTicket = rsQueryTicket.getInt(1);
-					if(resultQueryTicket == 1) {
-						isSuccess = true;
-					}
+				int countInsertTicket = pstmtInsertTicket.executeUpdate();
+				if(countInsertTicket == 1) {
+					isSuccess = true;
 				}
 			}
 			
