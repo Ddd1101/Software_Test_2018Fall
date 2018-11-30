@@ -60,7 +60,7 @@ public class CheckTicketDAO extends baseDAO {
 		}
 		String sql = "update theatre_ticket.ticket "
 				+ "set state = 0 "
-				+ "where ticket_id = ? and state != 0";
+				+ "where ticket_id = ? and state = 1";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, ticketId);
