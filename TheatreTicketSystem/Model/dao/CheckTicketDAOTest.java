@@ -70,6 +70,9 @@ public class CheckTicketDAOTest extends TestCase {
 		assertFalse(dao.checkTicket(-1L));
 		assertFalse(dao.checkTicket(0L));
 		assertFalse(dao.checkTicket(null));
+		assertTrue(dao.checkTicket(2L)); //new
+		assertFalse(dao.checkTicket(3L)); //new
+		assertFalse(dao.checkTicket(4L)); //new
 	}
 
 }
