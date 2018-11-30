@@ -1,7 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
-
+import java.util.Arrays;
 import java.math.BigDecimal;
 
 import dao.CheckTicketDAO;
@@ -73,6 +73,16 @@ public class CheckTicketDAOTest extends TestCase {
 		assertTrue(dao.checkTicket(2L)); //new
 		assertFalse(dao.checkTicket(3L)); //new
 		assertFalse(dao.checkTicket(4L)); //new
+	}
+	
+	@Test
+	public void testCheckTicketArray() {
+		assertEquals(new ArrayList<Boolean>(), dao.checkTicketArray(new ArrayList<Long>()));//空ArrayList
+		assertEquals(new ArrayList<Boolean>(Arrays.asList(true, true, false, false) ), 
+				dao.checkTicketArray(new ArrayList<Long>(Arrays.asList(1L, 2L, 3L, 4L) )));//第一次检票 应该部分通过
+		assertEquals(new ArrayList<Boolean>(Arrays.asList(false, false, false, false) ), 
+				dao.checkTicketArray(new ArrayList<Long>(Arrays.asList(1L, 2L, 3L, 4L) )));//第二次检票 所有票无效或已检过 应全部不通过
+		assertNull(dao.checkTicketArray(null));
 	}
 
 }

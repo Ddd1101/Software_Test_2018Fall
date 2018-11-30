@@ -81,4 +81,35 @@ public class CheckTicketDAO extends baseDAO {
 		}
 	}
 	
+	public ArrayList<Boolean> checkTicketArray(ArrayList<Long> ticketIdList) {
+		ArrayList<Boolean> resultList = new ArrayList<>();
+		ArrayList<Boolean> falseList = new ArrayList<>();
+		for(int i = 0; i < ticketIdList.size(); i++) {
+			falseList.add(false);
+		}
+		try {
+			conn.setAutoCommit(false);
+			for(Long ticketId : ticketIdList) {
+				boolean result = checkTicket(ticketId);
+				resultList.add(result);
+			}
+			if(resultList.indexOf(false) < 0) {
+				conn.commit();
+				return resultList;
+			} else {
+				conn.rollback();
+				return falseList;
+			}
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+			return falseList;
+		}
+		
+	}
+	
 }
