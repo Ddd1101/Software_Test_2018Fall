@@ -78,6 +78,8 @@ public class CheckTicketDAOTest extends TestCase {
 	@Test
 	public void testCheckTicketArray() {
 		assertEquals(new ArrayList<Boolean>(), dao.checkTicketArray(new ArrayList<Long>()));//空ArrayList
+		assertEquals(new ArrayList<Boolean>(Arrays.asList(false, false, false, false) ), 
+				dao.checkTicketArray(new ArrayList<Long>(Arrays.asList(1L, 2L, 3L, 4L) ), true));//第一次检票 应该部分通过
 		assertEquals(new ArrayList<Boolean>(Arrays.asList(true, true, false, false) ), 
 				dao.checkTicketArray(new ArrayList<Long>(Arrays.asList(1L, 2L, 3L, 4L) )));//第一次检票 应该部分通过
 		assertEquals(new ArrayList<Boolean>(Arrays.asList(false, false, false, false) ), 
